@@ -1,0 +1,14 @@
+# Robots.txt for Biostatistics and Bioinformatics Facility (BBF)
+# ICAR–National Institute on Foot and Mouth Disease, Bhubaneswar, Odisha, India
+# Canonical Base: https://nifmd.icar.gov.in/bbf/ (Configurable institutional URL placeholder)
+
+User-agent: *
+Allow: /
+
+# Exclude administrative, private scripts, and build telemetry if any
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.git/
+
+# Sitemaps
+Sitemap: https://nifmd.icar.gov.in/bbf/sitemap.xml
