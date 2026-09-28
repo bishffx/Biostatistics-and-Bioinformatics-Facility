@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ScientificHeroVisualization } from './ScientificHeroVisualization';
 import { ScientificDataBackground } from '../ui/ScientificDataBackground';
 import { Button } from '../ui/Button';
@@ -13,8 +14,8 @@ import {
 } from 'lucide-react';
 
 export interface HomeHeroProps {
-  onExploreFacility: () => void;
-  onExploreTools: () => void;
+  onExploreFacility?: () => void;
+  onExploreTools?: () => void;
 }
 
 export const HomeHero: React.FC<HomeHeroProps> = ({
@@ -67,25 +68,29 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
           {/* Action CTAs */}
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <Button
-              variant="teal"
-              size="lg"
-              onClick={onExploreFacility}
-              className="w-full sm:w-auto min-h-[44px] justify-center"
-              icon={<ChevronRight className="w-4 h-4" />}
-            >
-              Explore the Facility
-            </Button>
+            <Link to="/about" className="w-full sm:w-auto">
+              <Button
+                variant="teal"
+                size="lg"
+                onClick={onExploreFacility}
+                className="w-full sm:w-auto min-h-[44px] justify-center"
+                icon={<ChevronRight className="w-4 h-4" />}
+              >
+                Explore the Facility
+              </Button>
+            </Link>
 
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={onExploreTools}
-              className="w-full sm:w-auto min-h-[44px] justify-center"
-              icon={<Server className="w-4 h-4" />}
-            >
-              Research &amp; Tools
-            </Button>
+            <Link to="/research" className="w-full sm:w-auto">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={onExploreTools}
+                className="w-full sm:w-auto min-h-[44px] justify-center"
+                icon={<Server className="w-4 h-4" />}
+              >
+                Research &amp; Capabilities
+              </Button>
+            </Link>
 
             {/* Quick Live Tool Indicator */}
             <div className="flex sm:inline-flex items-center justify-center gap-2 px-3 py-2 rounded-sm bg-navy-900/80 border border-navy-700/80 text-xs font-mono text-slate-300 backdrop-blur-xs min-h-[40px]">

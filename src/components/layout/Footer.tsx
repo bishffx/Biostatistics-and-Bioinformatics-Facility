@@ -12,6 +12,8 @@ import {
   Lock 
 } from 'lucide-react';
 
+import { Link } from 'react-router-dom';
+
 export interface FooterProps {
   onNavigate?: (sectionId: string) => void;
 }
@@ -34,24 +36,22 @@ const VISITOR_ANALYTICS_CONFIG: VisitorAnalyticsPayload = {
 };
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
-  // Navigation items as specified in the brief
+  // Navigation items conforming to the clean URL architecture
   const navigationLinks = [
-    { label: 'Home', sectionId: 'home' },
-    { label: 'Biostatistics', sectionId: 'biostatistics' },
-    { label: 'Bioinformatics', sectionId: 'bioinformatics' },
-    { label: 'Infrastructure', sectionId: 'hardware-software' },
-    { label: 'Research', sectionId: 'projects' },
-    { label: 'Team', sectionId: 'team' },
-    { label: 'Publications', sectionId: 'publications' },
-    { label: 'Tools', sectionId: 'tools' },
-    { label: 'Contact', sectionId: 'contact' },
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' },
+    { label: 'Research', path: '/research' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Publications', path: '/publications' },
+    { label: 'Datasets', path: '/datasets' },
+    { label: 'Facilities', path: '/facilities' },
+    { label: 'People', path: '/people' },
+    { label: 'Contact', path: '/contact' },
   ];
 
-  const handleLinkClick = (sectionId: string, e: React.MouseEvent) => {
+  const handleLinkClick = (path: string) => {
     if (onNavigate) {
-      e.preventDefault();
-      onNavigate(sectionId);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      onNavigate(path);
     }
   };
 
@@ -121,15 +121,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs">
               {navigationLinks.map((item) => (
-                <li key={item.sectionId}>
-                  <a
-                    href={`#${item.sectionId}`}
-                    onClick={(e) => handleLinkClick(item.sectionId, e)}
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    onClick={() => handleLinkClick(item.path)}
                     className="hover:text-teal-300 transition-colors inline-flex items-center gap-1 text-slate-300 py-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded-xs"
                   >
                     <ChevronRight className="w-2.5 h-2.5 text-slate-600 shrink-0" aria-hidden="true" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -259,14 +259,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <span>Institutional Portal</span>
             </span>
             <span aria-hidden="true">&bull;</span>
-            <button
-              onClick={() => {
-                if (onNavigate) onNavigate('contact');
-              }}
+            <Link
+              to="/contact"
               className="hover:text-teal-300 transition-colors underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded-xs"
             >
               Consultation Disclaimer
-            </button>
+            </Link>
             <span aria-hidden="true">&bull;</span>
             <a
               href="https://nifmd.icar.gov.in"

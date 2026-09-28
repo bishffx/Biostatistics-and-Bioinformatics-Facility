@@ -7,73 +7,73 @@
   <!-- Primary Portal Landing -->
   <url>
     <loc>https://nifmd.icar.gov.in/bbf/</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Biostatistics & Study Design -->
+  <!-- About the Facility & Mandate -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#biostatistics</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/about</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
 
-  <!-- Bioinformatics & Computational Genomics -->
+  <!-- Research Programs & Methodologies -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#bioinformatics</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/research</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <!-- Computational Tools & Web Servers -->
-  <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#tools</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <!-- Computational Infrastructure & HPC -->
-  <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#hardware-software</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.95</priority>
   </url>
 
   <!-- Research Programs & Sponsored Grants -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#projects</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/projects</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
 
   <!-- Selected Scholarly Publications -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#publications</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/publications</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Curated Research Datasets -->
+  <url>
+    <loc>https://nifmd.icar.gov.in/bbf/datasets</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
+  <!-- Infrastructure & Laboratory Facilities -->
+  <url>
+    <loc>https://nifmd.icar.gov.in/bbf/facilities</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
   <!-- Research Team & Leadership -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#team</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/people</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.80</priority>
   </url>
 
   <!-- Facility Contact & Statistical Consultation -->
   <url>
-    <loc>https://nifmd.icar.gov.in/bbf/#contact</loc>
-    <lastmod>2026-09-27</lastmod>
+    <loc>https://nifmd.icar.gov.in/bbf/contact</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.75</priority>
   </url>
 
 </urlset>

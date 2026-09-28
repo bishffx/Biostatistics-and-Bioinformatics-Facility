@@ -1,76 +1,74 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { GovtHeader } from './GovtHeader';
 import { InstitutionalLogo } from './InstitutionalLogo';
 import { Menu, X, ChevronRight, MapPin } from 'lucide-react';
 
-export interface NavLink {
-  id: string;
+export interface NavItem {
+  path: string;
   label: string;
-  href: string;
   badge?: string;
 }
 
-export const MAIN_NAV_ITEMS: NavLink[] = [
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'biostatistics', label: 'Biostatistics', href: '#biostatistics' },
-  { id: 'bioinformatics', label: 'Bioinformatics', href: '#bioinformatics' },
-  { id: 'hardware-software', label: 'Hardware / Software', href: '#hardware-software' },
-  { id: 'projects', label: 'Research Projects', href: '#projects' },
-  { id: 'team', label: 'Team', href: '#team' },
-  { id: 'publications', label: 'Publications', href: '#publications' },
-  { id: 'tools', label: 'Tools', href: '#tools', badge: 'Live' },
-  { id: 'contact', label: 'Contact', href: '#contact' },
+export const MAIN_NAV_ITEMS: NavItem[] = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/research', label: 'Research' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/publications', label: 'Publications' },
+  { path: '/datasets', label: 'Datasets', badge: 'Archive' },
+  { path: '/facilities', label: 'Facilities' },
+  { path: '/people', label: 'People' },
+  { path: '/contact', label: 'Contact' },
 ];
 
 export interface GlobalHeaderProps {
-  activeSection: string;
-  onNavigate: (sectionId: string) => void;
+  activeSection?: string;
+  onNavigate?: (path: string) => void;
 }
 
 export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
   activeSection,
   onNavigate,
 }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
+  const isItemActive = (path: string) => {
+    if (activeSection) {
+      if (path === '/' && activeSection === 'home') return true;
+      if (path === `/${activeSection}`) return true;
+    }
+    if (path === '/') return currentPath === '/' || currentPath === '/home';
+    return currentPath.startsWith(path);
+  };
+
   // Monitor scroll position with IntersectionObserver on sentinel
-  // Guarantees ZERO layout oscillation, ZERO frame drops, and ZERO height changes
   useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const scrolled = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-        setIsScrolled(scrolled);
+        setIsScrolled(!entry.isIntersecting);
       },
       { threshold: 0 }
     );
 
     observer.observe(sentinel);
-
-    const handleScrollFallback = () => {
-      const scrolled = window.scrollY > 90;
-      setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
-    };
-
-    window.addEventListener('scroll', handleScrollFallback, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScrollFallback);
-    };
+    return () => observer.disconnect();
   }, []);
 
   // Accessibility: Lock background scroll and listen for Escape key on mobile menu
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      // Focus close button on open
       setTimeout(() => {
         closeButtonRef.current?.focus();
       }, 50);
@@ -91,62 +89,80 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
     }
   }, [mobileMenuOpen]);
 
-  const handleItemClick = (id: string) => {
-    onNavigate(id);
+  const handleLinkClick = (path: string) => {
     setMobileMenuOpen(false);
+    if (onNavigate) {
+      onNavigate(path);
+    }
   };
 
   return (
-    <header className="w-full font-sans bg-white relative z-40">
-      {/* 1. Official Government of India top bar (scrolls naturally with zero layout shift) */}
+    <header className="relative w-full z-40 font-sans">
+      {/* 1. Official Government of India top bar */}
       <GovtHeader />
 
-      {/* 2. Desktop Institutional Branding Bar (scrolls naturally with zero layout shift) */}
-      <div className="hidden md:block border-b border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-          {/* Institutional Logos & Identity */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 shrink-0">
-              <InstitutionalLogo
-                src="/assets/icar.png"
-                alt="ICAR Emblem"
-                fallbackText="ICAR"
-                className="h-14 w-auto"
-              />
-              <InstitutionalLogo
-                src="/assets/NIFMD new logo.jpg"
-                alt="ICAR-NIFMD Logo"
-                fallbackText="NIFMD"
-                className="h-14 w-auto rounded-sm"
-              />
+      {/* 2. Primary Desktop Institutional Branding Area (Permanent, zero layout shift) */}
+      <div className="w-full bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="hidden md:flex items-center justify-between py-3.5">
+            {/* Left: Institutional Logos & Identity */}
+            <div className="flex items-center gap-4">
+              <Link to="/" className="flex items-center gap-3 shrink-0 focus:outline-none focus:ring-1 focus:ring-sci-500 rounded">
+                <InstitutionalLogo
+                  src="/assets/icar.png"
+                  alt="ICAR Emblem"
+                  fallbackText="ICAR"
+                  className="h-14 w-auto"
+                />
+                <InstitutionalLogo
+                  src="/assets/NIFMD new logo.jpg"
+                  alt="ICAR-NIFMD Logo"
+                  fallbackText="NIFMD"
+                  className="h-14 w-auto rounded-sm"
+                />
+              </Link>
+
+              <div className="border-l border-slate-200 pl-4 space-y-0.5">
+                <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                  ICAR – National Institute on Foot and Mouth Disease
+                </div>
+                <Link to="/" className="hover:text-sci-700 transition-colors">
+                  <h1 className="text-xl lg:text-2xl font-serif font-bold text-navy-950 tracking-tight leading-none">
+                    Biostatistics and Bioinformatics Facility
+                  </h1>
+                </Link>
+                <div className="flex items-center gap-2 text-xs text-slate-500 pt-0.5">
+                  <span className="flex items-center gap-1 font-mono text-[11px]">
+                    <MapPin className="w-3 h-3 text-sci-600 shrink-0" aria-hidden="true" />
+                    Bhubaneswar, Odisha – 752050
+                  </span>
+                  <span>•</span>
+                  <span className="font-mono text-[11px] text-teal-700 font-medium">
+                    Centralized Computational Resource
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className="border-l border-slate-200 pl-4 space-y-0.5">
-              <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
-                ICAR – National Institute on Foot and Mouth Disease
+            {/* Right: Institutional Badge */}
+            <div className="flex items-center gap-3">
+              <div className="text-right border-r border-slate-200 pr-4 hidden lg:block">
+                <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Compute Cluster
+                </div>
+                <div className="flex items-center gap-1.5 justify-end text-xs font-semibold text-emerald-700">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" aria-hidden="true" />
+                  Servers Operational
+                </div>
               </div>
-              <h1 className="text-xl lg:text-2xl font-serif font-bold text-navy-950 tracking-tight leading-none">
-                Biostatistics and Bioinformatics Facility
-              </h1>
-              <p className="text-[12px] text-slate-600 font-sans">
-                A National Research &amp; Computational Biology Facility
-              </p>
-            </div>
-          </div>
 
-          {/* Right: Small Institutional Identity & Status Element */}
-          <div className="hidden lg:flex items-center gap-3 pl-6 border-l border-slate-200">
-            <div className="text-right">
-              <div className="text-xs font-semibold text-navy-950 flex items-center justify-end gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-sci-700 shrink-0" />
-                <span>ICAR–NIFMD</span>
-              </div>
-              <div className="text-[11px] text-slate-500 font-sans">
-                Bhubaneswar, Odisha
-              </div>
-              <div className="flex items-center justify-end gap-1.5 mt-0.5 text-[10px] font-mono text-emerald-700 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Facility Operational</span>
+              <div className="text-right">
+                <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                  Institutional Mandate
+                </div>
+                <div className="text-xs font-semibold text-navy-950">
+                  FMD Surveillance &amp; Omics
+                </div>
               </div>
             </div>
           </div>
@@ -167,18 +183,15 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* DESKTOP NAVIGATION ROW */}
           <div className="hidden md:flex items-center justify-between py-1.5 min-h-[48px]">
-            {/* Scrolled Compact Brand (smoothly reveals without vertical height shifts) */}
-            <div
-              onClick={() => handleItemClick('home')}
-              className={`flex items-center gap-2.5 cursor-pointer shrink-0 group py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500 rounded-sm transition-all duration-300 ease-in-out ${
+            {/* Scrolled Compact Brand */}
+            <Link
+              to="/"
+              className={`flex items-center gap-2.5 shrink-0 group py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500 rounded-sm transition-all duration-300 ease-in-out ${
                 isScrolled
                   ? 'max-w-[240px] opacity-100 pr-4 translate-x-0'
                   : 'max-w-0 opacity-0 pr-0 -translate-x-2 pointer-events-none overflow-hidden'
               }`}
-              role="button"
-              tabIndex={isScrolled ? 0 : -1}
               aria-label="BBF ICAR–NIFMD Home"
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleItemClick('home')}
             >
               <div className="flex items-center gap-1.5 shrink-0">
                 <InstitutionalLogo
@@ -204,7 +217,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
                   Bhubaneswar, Odisha
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Main Navigation Links */}
             <nav
@@ -212,17 +225,18 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
               aria-label="Main Institutional Navigation"
             >
               {MAIN_NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
+                const active = isItemActive(item.path);
                 return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleItemClick(item.id)}
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => handleLinkClick(item.path)}
                     className={`relative inline-flex items-center px-3 py-2 text-xs lg:text-[13px] font-medium transition-all duration-150 rounded-sm whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500 ${
-                      isActive
+                      active
                         ? 'text-sci-700 font-semibold bg-sci-50'
                         : 'text-slate-700 hover:text-navy-950 hover:bg-slate-50'
                     }`}
-                    aria-current={isActive ? 'page' : undefined}
+                    aria-current={active ? 'page' : undefined}
                   >
                     <span>{item.label}</span>
                     {item.badge && (
@@ -232,13 +246,13 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
                     )}
 
                     {/* Active Bottom Indicator Bar */}
-                    {isActive && (
+                    {active && (
                       <span
                         className="absolute bottom-0 left-2 right-2 h-[2px] bg-sci-700 rounded-full"
                         aria-hidden="true"
                       />
                     )}
-                  </button>
+                  </Link>
                 );
               })}
             </nav>
@@ -256,62 +270,61 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
             </div>
           </div>
 
-          {/* MOBILE HEADER BAR (Always stable, never shrinks or flickers) */}
+          {/* MOBILE HEADER BAR */}
           <div className="flex md:hidden items-center justify-between py-2.5">
-            <div
-              className="flex items-center gap-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500 rounded-sm"
-              onClick={() => handleItemClick('home')}
-              role="button"
-              tabIndex={0}
+            <Link
+              to="/"
+              className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500 rounded"
               aria-label="BBF ICAR–NIFMD Home"
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleItemClick('home')}
             >
               <InstitutionalLogo
                 src="/assets/icar.png"
-                alt="ICAR Emblem"
+                alt="ICAR"
                 fallbackText="ICAR"
-                className="h-8 w-auto"
+                className="h-9 w-auto"
                 isCompact
               />
               <InstitutionalLogo
                 src="/assets/NIFMD new logo.jpg"
-                alt="ICAR-NIFMD Logo"
+                alt="NIFMD"
                 fallbackText="NIFMD"
-                className="h-8 w-auto rounded-sm"
+                className="h-9 w-auto rounded-sm"
                 isCompact
               />
               <div>
                 <div className="text-xs font-serif font-bold text-navy-950 leading-tight">
-                  BBF Portal
+                  BBF | ICAR–NIFMD
                 </div>
-                <div className="text-[9.5px] text-slate-500 font-sans leading-none">
-                  ICAR–NIFMD, Bhubaneswar
+                <div className="text-[10px] text-slate-500 leading-tight">
+                  Bhubaneswar, Odisha
                 </div>
               </div>
-            </div>
+            </Link>
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Hamburger Button with WCAG 2.2 44x44px touch target */}
             <button
-              onClick={() => setMobileMenuOpen(true)}
-              className="min-h-[40px] min-w-[40px] flex items-center justify-center p-2 text-slate-700 hover:text-navy-950 hover:bg-slate-100 rounded-sm focus:outline-none focus:ring-2 focus:ring-sci-500 transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 text-slate-700 hover:text-navy-950 hover:bg-slate-100 rounded-sm focus:outline-none focus:ring-2 focus:ring-sci-500 transition-colors"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-navigation-drawer"
-              aria-label="Open Navigation Menu"
             >
-              <Menu className="w-5 h-5" />
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-slate-800" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6 text-slate-800" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* MOBILE NAVIGATION DRAWER & BACKDROP */}
+      {/* MOBILE NAVIGATION DRAWER */}
       {mobileMenuOpen && (
-        <div
-          id="mobile-navigation-drawer"
+        <div 
+          className="fixed inset-0 z-50 md:hidden"
           role="dialog"
           aria-modal="true"
-          aria-label="Site Navigation"
-          className="fixed inset-0 z-50 flex justify-end md:hidden"
+          aria-label="Mobile Navigation Menu"
         >
           {/* Backdrop */}
           <div
@@ -370,17 +383,18 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
             {/* Navigation List */}
             <nav className="flex-1 overflow-y-auto p-3 space-y-1" aria-label="Mobile Navigation Links">
               {MAIN_NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.id;
+                const active = isItemActive(item.path);
                 return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleItemClick(item.id)}
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => handleLinkClick(item.path)}
                     className={`w-full min-h-[44px] flex items-center justify-between px-3.5 py-2.5 rounded-sm text-sm font-medium transition-all ${
-                      isActive
+                      active
                         ? 'bg-sci-50 text-sci-800 font-semibold border-l-4 border-l-sci-700 pl-3'
                         : 'text-slate-700 hover:bg-slate-50 hover:text-navy-950'
                     } focus:outline-none focus-visible:ring-2 focus-visible:ring-sci-500`}
-                    aria-current={isActive ? 'page' : undefined}
+                    aria-current={active ? 'page' : undefined}
                   >
                     <div className="flex items-center gap-2">
                       <span>{item.label}</span>
@@ -392,10 +406,10 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
                     </div>
                     <ChevronRight
                       className={`w-4 h-4 transition-transform ${
-                        isActive ? 'text-sci-700 translate-x-0.5' : 'text-slate-400'
+                        active ? 'text-sci-700 translate-x-0.5' : 'text-slate-400'
                       }`}
                     />
-                  </button>
+                  </Link>
                 );
               })}
             </nav>
@@ -403,7 +417,7 @@ export const GlobalHeader: React.FC<GlobalHeaderProps> = ({
             {/* Drawer Footer */}
             <div className="p-4 border-t border-slate-200 bg-slate-50 text-xs text-slate-500 space-y-1.5">
               <div className="font-semibold text-slate-700">
-                Biostatistics & Bioinformatics Facility
+                Biostatistics &amp; Bioinformatics Facility
               </div>
               <div className="text-[11px] leading-relaxed">
                 National Institute on Foot and Mouth Disease, Bhubaneswar, Odisha, India

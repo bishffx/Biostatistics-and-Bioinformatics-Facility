@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 export interface FacilityMissionSectionProps {
@@ -203,17 +204,25 @@ export const FacilityMissionSection: React.FC<FacilityMissionSectionProps> = ({
                   </div>
 
                   {/* Navigation Trigger Link */}
-                  {onNavigateCapability && (
-                    <div className="pt-6 mt-6 border-t border-slate-100">
+                  <div className="pt-6 mt-6 border-t border-slate-100">
+                    {onNavigateCapability ? (
                       <button
                         onClick={() => onNavigateCapability(cap.id)}
                         className="inline-flex items-center gap-1.5 text-xs font-medium text-sci-700 hover:text-navy-950 transition-colors group-hover:underline focus:outline-none focus:ring-1 focus:ring-sci-500 rounded"
                       >
-                        <span>Explore {cap.title} Facility</span>
+                        <span>Explore {cap.title}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </button>
-                    </div>
-                  )}
+                    ) : (
+                      <Link
+                        to={`/research?tab=${cap.id}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-sci-700 hover:text-navy-950 transition-colors group-hover:underline focus:outline-none focus:ring-1 focus:ring-sci-500 rounded"
+                      >
+                        <span>Explore {cap.title}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </Link>
+                    )}
+                  </div>
                 </div>
               );
             })}
