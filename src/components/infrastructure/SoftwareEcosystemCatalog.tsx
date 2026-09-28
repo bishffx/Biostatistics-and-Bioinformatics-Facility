@@ -26,17 +26,24 @@ export const SOFTWARE_TOOLS: SoftwareTool[] = [
     badgeType: 'teal',
   },
   {
-    name: 'Python',
+    name: 'Python / Anaconda',
     category: 'Statistical Environment',
     roleInBBF: 'Data science, machine learning models, and automated NGS pipeline orchestration.',
     capabilities: ['Scikit-learn classifiers', 'BioPython parsing', 'Deep learning architectures (PyTorch)'],
     badgeType: 'primary',
   },
   {
+    name: 'Perl',
+    category: 'Statistical Environment',
+    roleInBBF: 'Methodological research scripting, sequence pattern parsing, and fast genomic file formatting.',
+    capabilities: ['FASTA / FASTQ parsing', 'Regular expression sequence mining', 'Pipeline automation scripts'],
+    badgeType: 'primary',
+  },
+  {
     name: 'MATLAB',
     category: 'Mathematical Modeling',
     roleInBBF: 'Numerical computation and simulation of complex mathematical and dynamical epidemiological models.',
-    capabilities: ['Differential equation modeling', 'Epidemic trajectory simulation', 'Matrix algorithms'],
+    capabilities: ['Differential equation modeling', 'Epidemic trajectory simulation', 'State-space matrix algorithms'],
     badgeType: 'amber',
   },
   {
@@ -47,11 +54,25 @@ export const SOFTWARE_TOOLS: SoftwareTool[] = [
     badgeType: 'teal',
   },
   {
-    name: 'PASS',
+    name: 'GSEA',
+    category: 'Multi-Omics Suite',
+    roleInBBF: 'Gene Set Enrichment Analysis for evaluating pathway-level coordinate expression changes.',
+    capabilities: ['Curated biological gene sets (MSigDB)', 'Leading-edge subset analysis', 'Phenotype pathway correlation'],
+    badgeType: 'teal',
+  },
+  {
+    name: 'PASS & Solo Power',
     category: 'Power & Sample Size',
     roleInBBF: 'Dedicated power analysis and sample size determination software for clinical trials and QC assays.',
     capabilities: ['Diagnostic sensitivity & specificity power', 'Clinical trial sample sizing', 'Equivalence & non-inferiority trials'],
     badgeType: 'amber',
+  },
+  {
+    name: 'GROMACS & Docking Suite',
+    category: 'Multi-Omics Suite',
+    roleInBBF: 'Open-source and structural tools for epitope prediction, molecular docking, and immune simulation.',
+    capabilities: ['Molecular dynamics simulation', 'Antigenic loop docking (AutoDock Vina)', 'Conformational stability analysis'],
+    badgeType: 'teal',
   },
 ];
 

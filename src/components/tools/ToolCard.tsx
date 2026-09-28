@@ -146,6 +146,24 @@ export const ToolCard: React.FC<ToolCardProps> = ({
               ))}
             </div>
           )}
+
+          {/* Institutional Citation Reference (Grounding in BBF documentation) */}
+          {tool.associatedPublication && (
+            <div className="pt-1.5">
+              <div 
+                className="text-[10px] text-slate-600 font-sans border border-sci-200/60 bg-sci-50/40 p-2 rounded flex items-start gap-1.5 transition-colors"
+                title={tool.associatedPublication.citation}
+              >
+                <BookOpen className="w-3 h-3 text-sci-700 shrink-0 mt-0.5" />
+                <div className="line-clamp-2 leading-relaxed">
+                  <span className="font-semibold text-sci-950 font-mono text-[9px] uppercase tracking-wider block mb-0.5">
+                    Citation Reference:
+                  </span>
+                  <span>{tool.associatedPublication.citation}</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
       </div>

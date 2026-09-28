@@ -34,7 +34,8 @@ export const TOOLS_DATA: ToolItem[] = [
     status: 'Production Server',
     officialUrl: 'https://nifmd-bbf.icar.gov.in/FMDSeroSurv/',
     associatedPublication: {
-      citation: 'Sci. Rep. 13, 22583 (2023)',
+      citation:
+        'Das, S., Pal, S., Rautaray, S.S., Mohapatra, J.K., Subramaniam, S., Rout, M., Rai, S.N., Singh, R.P. (2023). Estimation of foot-and-mouth disease virus sero-prevalence rates using novel computational approach for the susceptible bovine population in India during the period 2008–2021. Sci. Rep. 13, 22583.',
       doi: '10.1038/s41598-023-48459-w',
     },
     tags: ['Sero-Surveillance', 'Prevalence Estimation', 'FMDV', 'Sampling Design'],
@@ -42,7 +43,7 @@ export const TOOLS_DATA: ToolItem[] = [
     constellation: {
       cx: 20,
       cy: 35,
-      relatedToolIds: ['sero-monitor', 'nsp-pred-serv'],
+      relatedToolIds: ['sero-monitor', 'nsp-pred-serv', 'fmd-sero-surv-pkg'],
     },
   },
   {
@@ -56,7 +57,8 @@ export const TOOLS_DATA: ToolItem[] = [
     status: 'Production Server',
     officialUrl: 'https://nifmd-bbf.icar.gov.in/FMDVSerPred/',
     associatedPublication: {
-      citation: 'Current Bioinformatics 19(9), 794–809 (2024)',
+      citation:
+        'Das, S., Pal, S., Mahapatra, S., Biswal, J.K., Pradhan, S.K., Sahoo, A.P., & Singh, R.P. (2024). FMDVSerPred: A novel computational solution for foot-and-mouth disease virus classification and serotype prediction prevalent in Asia using VP1 nucleotide sequence data. Current Bioinformatics, 19(9), 794–809.',
       doi: '10.2174/0115748936278851231213110653',
     },
     tags: ['VP1 Sequence', 'Serotyping', 'Machine Learning', 'FMDV Asia'],
@@ -64,7 +66,7 @@ export const TOOLS_DATA: ToolItem[] = [
     constellation: {
       cx: 38,
       cy: 25,
-      relatedToolIds: ['mol-epid-pred', 'swarn-seq'],
+      relatedToolIds: ['mol-epid-pred', 'swarn-seq', 'fmdv-ser-pred-pkg'],
     },
   },
   {
@@ -78,7 +80,8 @@ export const TOOLS_DATA: ToolItem[] = [
     status: 'Production Server',
     officialUrl: 'https://nifmd-bbf.icar.gov.in/SeroMonitor/',
     associatedPublication: {
-      citation: 'Das et al. (2024, Communicated)',
+      citation:
+        'Das, S., Pal, S., Subramaniam, S., Mohapatra, J.K., Singh, R.P. (2024). Statistical Approach and Web Server for Foot-and-mouth Disease Sero-monitoring Parameter Estimation: An Application to Sero-monitoring Studies in India during 2006-22. (Communicated)',
     },
     tags: ['Sero-Monitoring', 'Vaccine Response', 'Herd Immunity', 'Statistical Modeling'],
     visualMotif: 'monitoring',
@@ -99,7 +102,8 @@ export const TOOLS_DATA: ToolItem[] = [
     status: 'Production Server',
     officialUrl: 'https://nifmd-bbf.icar.gov.in/MolEpidPred/',
     associatedPublication: {
-      citation: 'Das et al. (2024, Communicated)',
+      citation:
+        'Das, S., Nayak, U., Pal, S., Subramaniam, S. (2024). MolEpidPred: A Novel Computational Solution for the Molecular Epidemiology of Foot-and-mouth Disease Virus. (Communicated)',
     },
     tags: ['Molecular Epidemiology', 'VP1 Diversity', 'Lineage Tracking', 'Phylodynamics'],
     visualMotif: 'epidemiology',
@@ -120,7 +124,8 @@ export const TOOLS_DATA: ToolItem[] = [
     status: 'Production Server',
     officialUrl: 'https://nifmd-bbf.icar.gov.in/NSPPredServ/',
     associatedPublication: {
-      citation: 'Das et al. (2024, Communicated)',
+      citation:
+        'Das, S., Barik, B., Pal, S., Biswal, J.K., Mohapatra, J.K., Singh, R.P. (2024). NSPPredServ: A Computational Model-based Approach for Prediction of 2B Non-Structural Antibody against Foot-and-mouth Disease Virus in Cloven Hoofed Animals. (Communicated)',
     },
     tags: ['NSP 2B Antibody', 'DIVA Diagnostics', 'Wildlife-Livestock', 'Risk Analysis'],
     visualMotif: 'antibody',
@@ -238,6 +243,50 @@ export const TOOLS_DATA: ToolItem[] = [
       cx: 75,
       cy: 80,
       relatedToolIds: ['gsaq', 'swarn-seq', 'bsm'],
+    },
+  },
+  {
+    id: 'fmd-sero-surv-pkg',
+    name: 'FMDSeroSurv (R Package)',
+    category: 'R Packages',
+    shortPurpose: 'Sero-Surveillance Estimation Package',
+    fullDescription:
+      'Standalone R package implementation providing computational functions for FMDV sero-prevalence rates, sample size determination, and multi-stage sampling design for susceptible bovine populations.',
+    technologyType: 'GitHub R Package',
+    status: 'GitHub Repository',
+    officialUrl: 'https://github.com/sam-dfmd/FMDSeroSurv',
+    associatedPublication: {
+      citation: 'Sci. Rep. 13, 22583 (2023)',
+      doi: '10.1038/s41598-023-48459-w',
+    },
+    tags: ['GitHub', 'Sero-Surveillance', 'Prevalence Estimation', 'FMDV'],
+    visualMotif: 'surveillance',
+    constellation: {
+      cx: 22,
+      cy: 88,
+      relatedToolIds: ['fmd-sero-surv', 'bsm'],
+    },
+  },
+  {
+    id: 'fmdv-ser-pred-pkg',
+    name: 'FMDVSerPred (R Package)',
+    category: 'R Packages',
+    shortPurpose: 'FMDV Serotype & Lineage Classifier',
+    fullDescription:
+      'High-throughput R package providing machine learning prediction models for rapid Foot-and-Mouth Disease Virus serotyping and VP1 nucleotide sequence classification prevalent across Asia.',
+    technologyType: 'GitHub R Package',
+    status: 'GitHub Repository',
+    officialUrl: 'https://github.com/sam-dfmd/FMDVSerPred',
+    associatedPublication: {
+      citation: 'Current Bioinformatics 19(9), 794–809 (2024)',
+      doi: '10.2174/0115748936278851231213110653',
+    },
+    tags: ['GitHub', 'Serotyping', 'Machine Learning', 'VP1 Sequence'],
+    visualMotif: 'prediction',
+    constellation: {
+      cx: 42,
+      cy: 85,
+      relatedToolIds: ['fmdv-ser-pred', 'swarn-seq'],
     },
   },
 ];

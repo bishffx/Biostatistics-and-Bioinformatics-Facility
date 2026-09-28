@@ -8,7 +8,9 @@ export interface InstitutionalContactInfo {
     role: string;
     emailPrimary: string;
     emailAlternate: string;
-    phonePlaceholder: string;
+    phoneOffice: string;
+    phoneResidence: string;
+    phonePlaceholder?: string;
   };
   address: {
     campus: string;
@@ -34,7 +36,8 @@ export const CONTACT_INFO: InstitutionalContactInfo = {
     role: 'Principal Investigator',
     emailPrimary: 'samarendra.das@icar.gov.in',
     emailAlternate: 'samarendra4849@gmail.com',
-    phonePlaceholder: '[Institutional telephone / extension to be added]',
+    phoneOffice: '+91 674-2601109',
+    phoneResidence: '+91 674-2912335',
   },
   address: {
     campus: 'ICAR–NIFMD Permanent Research Campus',

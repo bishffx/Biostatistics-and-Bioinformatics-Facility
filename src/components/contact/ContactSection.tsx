@@ -204,10 +204,22 @@ export const ContactSection: React.FC = () => {
                 </a>
               </div>
               <div className="flex items-center gap-2 pt-1">
-                <span className="text-slate-400 text-[10px] uppercase w-20">Telephone:</span>
-                <span className="text-slate-400 text-[10px] italic">
-                  {CONTACT_INFO.principalInvestigator.phonePlaceholder}
-                </span>
+                <span className="text-slate-400 text-[10px] uppercase w-20">Office Phone:</span>
+                <a
+                  href={`tel:${CONTACT_INFO.principalInvestigator.phoneOffice.replace(/\s+/g, '')}`}
+                  className="text-slate-700 hover:text-sci-700 hover:underline text-[11px]"
+                >
+                  {CONTACT_INFO.principalInvestigator.phoneOffice} (O)
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 text-[10px] uppercase w-20">Campus/Res:</span>
+                <a
+                  href={`tel:${CONTACT_INFO.principalInvestigator.phoneResidence.replace(/\s+/g, '')}`}
+                  className="text-slate-600 hover:text-sci-700 hover:underline text-[11px]"
+                >
+                  {CONTACT_INFO.principalInvestigator.phoneResidence} (R)
+                </a>
               </div>
             </div>
           </div>

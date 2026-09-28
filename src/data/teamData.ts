@@ -34,6 +34,17 @@ export interface StudentDissertationItem {
   institute: string;
 }
 
+export interface CollaborativeScientistItem {
+  id: string;
+  name: string;
+  salutation: string;
+  designation: string;
+  role: string;
+  institution: string;
+  location: string;
+  collaborativeDomains: string[];
+}
+
 export const PI_DATA: PiProfileData = {
   name: 'Samarendra Das',
   salutation: 'Dr.',
@@ -161,3 +172,37 @@ export const STUDENT_ALUMNI_DATA: StudentDissertationItem[] = [
     institute: 'Odisha University of Agriculture & Technology (OUAT)',
   },
 ];
+
+export const COLLABORATIVE_SCIENTISTS_DATA: CollaborativeScientistItem[] = [
+  {
+    id: 'scientist-soumen-pal',
+    name: 'Soumen Pal',
+    salutation: 'Dr.',
+    designation: 'Senior Scientist',
+    role: 'Collaborative Senior Biostatistician & Co-Investigator',
+    institution: 'ICAR–Indian Agricultural Statistics Research Institute (ICAR-IASRI)',
+    location: 'Library Avenue, Pusa, New Delhi – 110012, India',
+    collaborativeDomains: [
+      'Biostatistics & Sero-Surveillance Methodology',
+      'FMDSeroSurv & SeroMonitor Computational Web Platforms',
+      'FMDVSerPred Asian Serotype Classification',
+      'Longitudinal Disease Prevalence Modeling in Bovine Populations',
+    ],
+  },
+  {
+    id: 'scientist-ap-sahoo',
+    name: 'A. P. Sahoo',
+    salutation: 'Dr.',
+    designation: 'Senior Scientist',
+    role: 'Collaborative Senior Scientist & Molecular Virology Investigator',
+    institution: 'ICAR–National Institute on Foot and Mouth Disease (ICAR-NIFMD)',
+    location: 'Arugul-Jatni Road, Bhubaneswar – 752050, Odisha, India',
+    collaborativeDomains: [
+      'FMDV Molecular Virology & Host-Pathogen Interaction',
+      'FMDVSerPred Viral Sequence Analytics & Classification',
+      'In-Silico Vaccine Design & Structural Antigenic Mapping',
+      'Diagnostic Serology & Viral Neutralization Benchmarks',
+    ],
+  },
+];
+

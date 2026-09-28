@@ -22,9 +22,9 @@ export const BIOSTATISTICS_SERVICES: ServiceItem[] = [
       'Statistical expertise in the design of experimental laboratory assays and field studies, including statistical sections for competitive research grant proposals and formal pre-analysis planning.',
     deliverables: [
       'Experimental study design (CRD, RCBD, Factorial, Split-plot)',
-      'Grant proposal writing & statistical methodologies',
-      'Data pre-processing plans for interim reviews',
-      'Protocol reviews for institutional ethical compliance',
+      'Research proposal grant writing & statistical sections for manuscripts',
+      'Data pre-processing plans for interim reviews & final analysis',
+      'Mentoring, training, and institutional statistical consultation',
     ],
     scientificMethods: [
       'Factorial blocking & randomization frameworks',
@@ -40,10 +40,10 @@ export const BIOSTATISTICS_SERVICES: ServiceItem[] = [
     scopeSummary:
       'Framing sampling design and high-precision parameter estimation for sero-surveillance and sero-monitoring of infectious animal diseases in livestock populations and the wildlife-livestock interface.',
     deliverables: [
-      'Sampling design for sero-surveillance programs',
-      'Parameter estimation for sero-monitoring studies',
-      'Surveillance at the livestock-wildlife interface',
-      'Multi-stage cluster sampling & strata weighting',
+      'Sampling design & sample size calculation for sero-surveillance programs',
+      'Parameter estimation for sero-monitoring studies (herd immunity thresholds)',
+      'Sero-surveillance and monitoring parameter estimation in wildlife-livestock interface',
+      'Multi-stage cluster sampling & strata weighting with finite population correction',
     ],
     scientificMethods: [
       'Two-stage stratified random cluster sampling',
@@ -61,13 +61,13 @@ export const BIOSTATISTICS_SERVICES: ServiceItem[] = [
     deliverables: [
       'Mathematical modeling of transmission dynamics',
       'Infectious disease incidence forecasting',
-      'ROC diagnostic evaluation (sensitivity, specificity, AUC)',
-      'Youden index cutoff optimization for field tests',
+      'State-space models for infectious disease epidemiology',
+      'ROC diagnostic evaluation (sensitivity, specificity, AUC) & power analysis',
     ],
     scientificMethods: [
       'Compartmental models (SIR / SEIR systems)',
+      'State-space time-series & epidemiological forecasting',
       'Parametric & non-parametric ROC curve analysis',
-      'Epidemic curve peak & wave duration forecasting',
     ],
   },
   {
@@ -78,9 +78,9 @@ export const BIOSTATISTICS_SERVICES: ServiceItem[] = [
     scopeSummary:
       'Methodology for animal vaccine and drug clinical trials, including rigorous sample size determination and statistical power computation for vaccine batch release and quality control studies.',
     deliverables: [
-      'Sample size calculations for vaccine quality control',
+      'Sample size determination for vaccine quality control studies',
       'Statistical power calculations across trial arms',
-      'Clinical trial methodology for vaccines and therapeutics',
+      'Clinical study design for vaccine and drug trials',
       'Batch-to-batch consistency & potency verification',
     ],
     scientificMethods: [

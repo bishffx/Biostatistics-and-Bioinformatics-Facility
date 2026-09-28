@@ -165,14 +165,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              {/* Phone Placeholder */}
+              {/* Phone Coordinates */}
               <div className="flex items-start gap-2">
                 <Phone className="w-3.5 h-3.5 text-teal-400 shrink-0 mt-0.5" />
                 <div className="text-[11px]">
                   <span className="text-slate-400 block text-[10px] font-mono uppercase">Phone:</span>
-                  <span className="text-slate-400 italic text-[10.5px] font-mono">
-                    [Institutional telephone / extension to be added]
-                  </span>
+                  <a
+                    href="tel:+916742601109"
+                    className="text-slate-300 hover:text-teal-300 font-mono text-[10.5px]"
+                  >
+                    +91 674-2601109 (O)
+                  </a>
                 </div>
               </div>
 
